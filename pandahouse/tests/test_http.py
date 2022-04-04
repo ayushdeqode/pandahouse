@@ -1,7 +1,7 @@
 import pytest
 
 from requests.exceptions import RequestException, ConnectionError
-from pandahouse.http import execute, ClickhouseException
+from a.http import execute, ClickhouseException
 
 
 def test_execute(connection):

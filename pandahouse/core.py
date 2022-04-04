@@ -5,7 +5,7 @@ from .convert import normalize, partition, to_dataframe, to_csv
 
 def selection(query, tables=None, index=True):
     query = query.strip().strip(';')
-    query = '{} FORMAT TSVWithNamesAndTypes'.format(query)
+    query = '{} FORMAT TSVWithNames'.format(query)
 
     external = {}
     tables = tables or {}

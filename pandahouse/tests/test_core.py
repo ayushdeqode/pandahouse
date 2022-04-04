@@ -5,8 +5,8 @@ import datetime
 import numpy as np
 import pandas as pd
 
-from pandahouse.http import execute
-from pandahouse.core import to_clickhouse, read_clickhouse
+from a.http import execute
+from a.core import to_clickhouse, read_clickhouse
 
 from pandas.testing import assert_frame_equal
 

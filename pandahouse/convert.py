@@ -1,12 +1,10 @@
 import csv
 import sys
+from collections import OrderedDict
+
 import numpy as np
 import pandas as pd
-from collections import OrderedDict
 from toolz import itemmap, keymap, valmap
-
-from .utils import decode_escapes, decode_array
-
 
 MAPPING = {'object': 'String',
            'uint64': 'UInt64',
@@ -60,23 +58,7 @@ def to_csv(df):
 
 def to_dataframe(lines, **kwargs):
     names = lines.readline().decode('utf-8').strip().split('\t')
-    types = lines.readline().decode('utf-8').strip().split('\t')
-
-    dtypes, parse_dates, converters = {}, [], {}
-    for name, chtype in zip(names, types):
-        dtype = CH2PD.get(chtype, 'object')
-
-        if chtype.startswith("Array("):
-            converters[name] = decode_array
-        elif dtype == 'object':
-            converters[name] = decode_escapes
-        elif dtype.startswith('datetime'):
-            parse_dates.append(name)
-        else:
-            dtypes[name] = dtype
-
-    return pd.read_csv(lines, sep='\t', header=None, names=names, dtype=dtypes,
-                       parse_dates=parse_dates, converters=converters,
+    return pd.read_csv(lines, sep='\t', header=None, names=names,
                        na_values=set(), keep_default_na=False, **kwargs)
 
 

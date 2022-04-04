@@ -1,6 +1,6 @@
 import pytest
 
-from pandahouse.utils import escape
+from a.utils import escape
 
 
 @pytest.mark.parametrize('value,quote,expected', [
